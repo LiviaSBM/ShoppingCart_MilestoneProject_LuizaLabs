@@ -34,20 +34,31 @@ def get_item_cart_by_id(shoppingcart):
 
 print(get_item_cart_by_id(shoppingcart))
 
-def remove_item_id(diffproducts, shoppingcart):
+def remove_item_id(shoppingcart):
+    if len(shoppingcart)==0:
+        return "O carrinho está vazio"
+    
     removalquestion = input("Você gostaria de excluir algum item do carrinho? Escolha S/N \n")
-    dicrem = {}
+    dicionario = {}
+    y=0
     while removalquestion=="s" or removalquestion=="S":
         print("Segue abaixo a lista de produtos atualmente presentes no carrinho:\n")
-        for item in range(diffproducts):
-            print(f"Produto: {shoppingcart[item[1]]}\tID: {shoppingcart[item[2]]}")
-            dicrem[item[2]]=item
+        while y<len(shoppingcart):
+            print(f"Produto: {shoppingcart[y][1]}\tID: {shoppingcart[y][2]}")
+            dicionario[shoppingcart[y][2]]=y
+            y+=1
             
         itemtoberemoved = input("Digite o ID do item que gostaria de remover \n")
-        shoppingcart.pop(dicrem[itemtoberemoved])
+        shoppingcart.pop(dicionario[itemtoberemoved])
             
         removalquestion = input("Você gostaria de excluir outro item? Escolha S/N \n")
-            
-    return f"The updated cart contains the following items: {shoppingcart}"
+    
+    #listafinal=[]
+    #for item2 in range(len(shoppingcart)):
+    #    listafinal.append(shoppingcart[item2[1]])
+    #return f"O carrinho final contem os seguintes itens: {listafinal}"
+    #return f"O carrinho final contem os seguintes itens: {shoppingcart}"
+    
+    return shoppingcart
 
-#print(get_item_cart_by_id(shoppingcart))
+print(f"Segue a lista atualizada de produtos no carrinho:\n{remove_item_id(shoppingcart)}")
